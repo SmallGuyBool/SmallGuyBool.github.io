@@ -7,6 +7,8 @@ body {
     height: inherit;
     padding: 0px 0px;
     margin: 0px 0px;
+    background-color: black;
+
 
     /* Hide scrollbars */
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -22,14 +24,50 @@ body {
 #main-content {
     display: flex;
     height: inherit;
+    width: 1408px;
     
+
+
+    margin: 0 auto;
 }
 
 .sidebar {
-    width: 40%;
+    height: inherit;
+    width: 512px;
     
     background-image: url('./images/tiles/grass_2.png');
     background-size: 128px 128px;
+}
+
+.path-edge {
+    height: inherit;
+    width: 128px;
+
+    top: 0px;
+    z-index: 2;
+
+    position: relative;
+    background-image: url('./images/tiles/path_edge_1.png');
+}
+
+#right-bar {
+    text-align: right;
+}
+
+#left-path-edge {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+
+    float: right;    
+}
+
+#right-path-edge {
+    left: 0px;
+    
 }
 
 .content-column {
@@ -69,10 +107,10 @@ body {
     width: 128px;
     height: 128px;
 
-    background-color: red;
+    background-image: url('./images/sprites/gato_1.png');
+    z-index: 2;
 
-    left: 50%;
-    margin-left: -64px;
+    margin-left: 128px;
     top: 128px;
 }
 
@@ -107,8 +145,7 @@ body {
 
 #first-ruin {
     background-color: #292929;
-    right: 256px;
-    top: 512px;
+    top: 1152px
 }
 
 /* HIDE SCROLLBARS */
