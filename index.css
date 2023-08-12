@@ -65,9 +65,37 @@ body {
     float: right;    
 }
 
+
 #right-path-edge {
     left: 0px;
     
+}
+
+#right-path-edge-interior {
+    -moz-transform: scale(-1, -1);
+    -o-transform: scale(-1, -1);
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    
+
+    height: inherit;
+    position: relative;
+    float: right;
+}
+
+#left-path-edge-interior {
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+
+    height: inherit;
+    position: absolute;
+    float: left;
 }
 
 .content-column {
@@ -81,15 +109,25 @@ body {
     width: 640px;
     height: 384px;
     background-color: #292929;
+    color: white;
+    text-align: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 
-    left: 50%;
-    margin-left: -320px;
+    margin-left: 384px;
+    
 
     z-index: 5;
 }
 
+#cave-text{
+    margin: auto;
+    width: fit-content;
+    margin-top: 128px;
+}
+
 #path-container {
-    
+    height: inherit;
     width: 384px;
 
     flex-shrink: 0;
@@ -145,7 +183,8 @@ body {
 
 #first-ruin {
     background-color: #292929;
-    top: 1152px
+    top: 1152px;
+    left: 128px;
 }
 
 /* HIDE SCROLLBARS */
