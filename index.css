@@ -143,8 +143,8 @@ body {
 
 .content-column {
     /* Define grid layout */
-    display: block;
-    
+    display: inline;
+    position: relative;
 }
 
 #cave {
@@ -172,6 +172,7 @@ body {
 #path-container {
     height: inherit;
     width: 384px;
+    
 
     flex-shrink: 0;
 
@@ -224,10 +225,22 @@ body {
     animation-fill-mode: forwards;
 }
 
-#first-ruin {
-    background-color: #292929;
-    top: 1152px;
-    left: 128px;
+.plant {
+    position: absolute;
+    display: inline;
+}
+
+.tree {
+    position: absolute;
+    z-index: 4;
+    height: 256px;
+    width: 128px;
+    background-image: url('./images/sprites/spruce.png');
+}
+
+#test-tree {
+    margin-top: 128px;
+    margin-left: 128px;
 }
 
 /* HIDE SCROLLBARS */
