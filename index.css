@@ -19,6 +19,9 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 20px;
+
+    /* Initially disable scrolling */
+    overflow-y: hidden;
 }
 
 #main-content {
@@ -26,9 +29,49 @@ body {
     height: inherit;
     width: 1408px;
     
-
-
     margin: 0 auto;
+}
+
+@keyframes fade-out {
+    from{opacity: 1;}
+    to{opacity: 0;}
+}
+
+#title-screen {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    z-index: 10;
+    
+}
+
+#title {
+    position: absolute;
+    text-align: center;
+    width: 800px;
+
+    left: calc(50% - 400px);
+    font-size: 100px;
+}
+
+#start-button {
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #292929;
+    color: white;
+    
+    position: absolute;
+
+    top: 50vh;
+    left: calc(50% - 200px);
+}
+
+#start-button:hover {
+    cursor: pointer;
+    background-color: black;
 }
 
 .sidebar {
@@ -108,7 +151,7 @@ body {
     position: absolute;
     width: 640px;
     height: 384px;
-    background-color: #292929;
+    background-image: url('./images/sprites/cave.png');
     color: white;
     text-align: center;
     border-bottom-left-radius: 20px;
@@ -165,7 +208,7 @@ body {
 .structure {
     width: 256px;
     height: 256px;
-    position: absolute;
+    position: relative;
     
 }
 
