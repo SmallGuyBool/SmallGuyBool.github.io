@@ -2,6 +2,11 @@ html {
     height: 2000vh;
 }
 
+@font-face {
+    font-family: 'pixel';
+    src: url('./fonts/Apple\ II\ Pro.otf') format('opentype');
+}
+
 body {
     width: 100vw;
     height: inherit;
@@ -14,6 +19,7 @@ body {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
     overflow-y: scroll; 
+    overflow-x: hidden;
 
     /* Specify default font settings */
     font-family: 'Montserrat', sans-serif;
@@ -42,6 +48,7 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: white;
+    font-family: 'pixel';
     z-index: 10;
     
 }
@@ -59,7 +66,7 @@ body {
     width: 400px;
     height: 50px;
     font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'pixel';
     background-color: #292929;
     color: white;
     
@@ -178,6 +185,7 @@ body {
 
     /* Specify visual style */
     background-image: url('./images/tiles/stone_path_1.png');
+    background-position-x: 0px;
     background-size: 128px 128px;
 }
 
@@ -189,7 +197,7 @@ body {
     width: 128px;
     height: 128px;
 
-    background-image: url('./images/sprites/gato_1.png');
+    background-image: url('./images/sprites/cat_sprite_sheet.png');
     z-index: 2;
 
     margin-left: 128px;
@@ -211,6 +219,20 @@ body {
     to {opacity: 1;}
 }
 
+.env-text {
+    width: 384px;
+    height: 384px;
+    position: absolute;
+    z-index: 3;
+}
+
+#text1 {
+    background-image: url("./images/sprites/text1.png");
+    
+    left: 64px;
+    top: 896px;
+}
+
 .town {
     width: 1408px;
     position: relative;
@@ -224,7 +246,7 @@ body {
     width: 40px;
     height: 40px;
     border: 0px;
-    color: red;
+    color: white;
     transform: translateX(calc(256px - 20px));
     background-color: transparent;
     font-size: 20px;
@@ -234,11 +256,12 @@ body {
 
 .x-button:hover {
     cursor: pointer;
-    color: white;
+    color: #ccc;
     
 }
 
 .town-info {
+    font-family: 'pixel';
     display: none;
     position: absolute;
     width: 512px;
@@ -264,7 +287,7 @@ body {
     position: relative;
     
     /* Temp styles */
-    background-color: #292929;
+    background-image: url("./images/sprites/house1.png");
     
 }
 
@@ -277,17 +300,10 @@ body {
 }
 
 .interactable:hover {
-    animation-name: glow;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
+    background-position: 256px;
     cursor: pointer;
 }
 
-.interactable:not(:hover) {
-    animation-name: unglow;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-}
 
 .plant {
     position: absolute;

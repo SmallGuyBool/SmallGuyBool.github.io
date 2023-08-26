@@ -59,14 +59,54 @@ interactableBuildings.forEach(building => {
         infoBox.style.animationName = "fadeIn";
         infoBox.style.animationDuration = "0.5s";
         infoBox.style.animationFillMode = "forwards";
-        
-
+        var letter;
+        var newline = String.fromCharCode(13, 10);
+        var pause = false;
         // Animate typing effect
-        for(let i = 0; i < info.length; i++) {
-            await timer(100);
-            infoBox.querySelector("p").innerHTML += info[i];
+        if(infoBox.querySelector("p").innerHTML == "") {
+            for(let i = 0; i < info.length; i++) {
+
+                // If the loop has been externally cancelled, clear and start again
+                if(infoBox.querySelector("p").innerHTML.length < 2 && i >= 2) {
+                    infoBox.querySelector("p").innerHTML = "";
+                    i = 0;
+                }
+                
+                await timer(80);
+                letter = info[i];
+                if(letter == ".") {
+                    pause = true;
+                }
+                infoBox.querySelector("p").innerHTML += letter;
+                if(pause) {
+                    await timer(250);
+                    pause = false;
+                }
+            }
         }
-        
     });
 });
 /* End building interaction */
+
+/* Character animator */
+var lastPos, currPos = 0;
+var scrollIncrements = 2;
+var scrollCount = 0;
+var imgOffset = 0;
+document.addEventListener("scroll", (event) => {
+    // Check current scroll position
+    currPos = window.scrollY;
+
+    // Offset spritesheet position
+    if (scrollCount >= scrollIncrements)
+    {
+        imgOffset += 128;
+        scrollCount = 0;
+    } else {
+        scrollCount++;
+    }
+    if(imgOffset == 128 * 4) {imgOffset = 0;}
+    const player = document.getElementById("character");
+    player.style.backgroundPositionX = imgOffset + "px";
+});
+/* End Character animator */
