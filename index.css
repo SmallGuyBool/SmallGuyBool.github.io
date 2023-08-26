@@ -78,7 +78,7 @@ body {
     height: inherit;
     width: 512px;
     
-    background-image: url('./images/tiles/grass_2.png');
+    background-image: url('./images/tiles/grass.png');
     background-size: 128px 128px;
 }
 
@@ -90,7 +90,7 @@ body {
     z-index: 2;
 
     position: relative;
-    background-image: url('./images/tiles/path_edge_1.png');
+    background-image: url('./images/tiles/path_edge.png');
 }
 
 #right-bar {
@@ -206,20 +206,84 @@ body {
     to { box-shadow: 2px 2px 2px 2px rgba(255, 255, 255, 0); }
 }
 
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.town {
+    width: 1408px;
+    position: relative;
+    margin-left: -512px;
+    
+    z-index: 3;
+}
+
+.x-button {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: 0px;
+    color: red;
+    transform: translateX(calc(256px - 20px));
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.x-button:hover {
+    cursor: pointer;
+    color: white;
+    
+}
+
+.town-info {
+    display: none;
+    position: absolute;
+    width: 512px;
+    left: calc(704px - 256px);
+    text-align: center;
+    color: white;
+    opacity: 0;
+    background-color: black;
+    border: 4px solid white;
+}
+
+#town1 {
+    top: 2048px;
+}
+
+.info-container {
+    display: none;
+}
+
 .structure {
     width: 256px;
     height: 256px;
     position: relative;
     
+    /* Temp styles */
+    background-color: #292929;
+    
 }
 
-.structure:hover {
+.right {
+    transform: translateX(calc(512px + 384px + 128px));
+}
+
+.left {
+    transform: translateX(calc(128px));
+}
+
+.interactable:hover {
     animation-name: glow;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
+    cursor: pointer;
 }
 
-.structure:not(:hover) {
+.interactable:not(:hover) {
     animation-name: unglow;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
