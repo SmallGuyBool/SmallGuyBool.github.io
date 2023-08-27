@@ -1,4 +1,7 @@
 
+var backgroundAudio = new Audio("./audio/forest.mp3");
+
+
 /* Handle document loading events */
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
@@ -11,12 +14,17 @@ const timer = ms => new Promise(res => setTimeout(res, ms))
 const startButton = document.getElementById('start-button');
 const titleScreen = document.getElementById('title-screen');
 
-startButton.addEventListener('click', () => {
+startButton.addEventListener('click', async function() {
     document.body.style.overflowY = 'scroll';
     titleScreen.style.animationName = 'fade-out';
     titleScreen.style.animationDuration = '1s';
     titleScreen.style.animationFillMode = 'forwards';
     
+    // Play start audio
+    var audio = new Audio("./audio/Opening_chord.mp3");
+    audio.play();
+    await timer(8000);
+    backgroundAudio.play();
 });
 
 titleScreen.addEventListener('animationend', () => {
@@ -30,6 +38,7 @@ function closeInfo(name) {
     const infoBox = document.getElementById(name);
     infoBox.querySelector("p").innerHTML = "";
     infoBox.style.display = "none";
+    document.getElementById("arrow").style.display = "none";
 }
 /* End onclick info hiding */
 
@@ -55,6 +64,7 @@ interactableBuildings.forEach(building => {
 
         infoBox.style.display = "block";
 
+
         // Animate fade in
         infoBox.style.animationName = "fadeIn";
         infoBox.style.animationDuration = "0.5s";
@@ -62,18 +72,50 @@ interactableBuildings.forEach(building => {
         var letter;
         var newline = String.fromCharCode(13, 10);
         var pause = false;
+        var typingAudio = new Audio("./audio/Type_sound_2.mp3");
+
+        var y, scrollPos;
+        const windowHeight = window.innerHeight;
+        const arrow = document.getElementById("arrow");
+        arrow.innerHTML = "^";
         // Animate typing effect
         if(infoBox.querySelector("p").innerHTML == "") {
             for(let i = 0; i < info.length; i++) {
 
-                // If the loop has been externally cancelled, clear and start again
-                if(infoBox.querySelector("p").innerHTML.length < 2 && i >= 2) {
-                    infoBox.querySelector("p").innerHTML = "";
-                    i = 0;
+
+                // Check if the dialogue box is offscreen
+                y = infoBox.getBoundingClientRect().top;
+                scrollPos = window.scrollY / windowHeight;
+                
+                
+                if(y >= scrollPos + windowHeight) {
+                    // Bottom of screen
+                    arrow.style.top = "calc(100vh - 128px - 10px)";
+                    arrow.style.transform = "scaleY(-1)";
+                    arrow.style.display = "block";
+                } else if (y < scrollPos - windowHeight / 4) {
+                    // Top of screen
+                    arrow.style.top = "10px";
+                    arrow.style.transform= "scaleY(1)";
+                    arrow.style.display = "block";
+                }  else {
+                    arrow.style.display = "none";
                 }
                 
-                await timer(80);
+
+                // If the loop has been externally cancelled, clear and start again
+                if(infoBox.querySelector("p").innerHTML.length != i) {
+                    infoBox.querySelector("p").innerHTML = "";
+                    i = 0;
+                    break;
+                }
+                
+                await timer(70);
+
+                
                 letter = info[i];
+                if(letter != " "){typingAudio.play();}
+                
                 if(letter == ".") {
                     pause = true;
                 }
@@ -84,13 +126,14 @@ interactableBuildings.forEach(building => {
                 }
             }
         }
+        arrow.style.display = "none";
     });
 });
 /* End building interaction */
 
 /* Character animator */
 var lastPos, currPos = 0;
-var scrollIncrements = 2;
+var scrollIncrements = 4;
 var scrollCount = 0;
 var imgOffset = 0;
 document.addEventListener("scroll", (event) => {
@@ -110,3 +153,95 @@ document.addEventListener("scroll", (event) => {
     player.style.backgroundPositionX = imgOffset + "px";
 });
 /* End Character animator */
+
+
+/* Random tree generator */
+
+function randomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+const numTrees = 200;
+const leftSide = document.getElementById("left-bar");
+const rightSide = document.getElementById("right-bar");
+
+const leftOffset = leftSide.getBoundingClientRect().left;
+const rightOffset = rightSide.getBoundingClientRect().left;
+var side, x, y;
+const xVar = 384;
+const yVar = 8192 / 2;
+const objList = ["structure", "env-text", "cave"];
+
+for (let j = 0; j < numTrees; j++) {
+    side = randomInt(2);
+    if (side == 0) {
+        // Create tree on the left side
+
+        let overlapping = true;
+        while (overlapping) {
+            x = randomInt(xVar + 1);
+            y = randomInt(yVar + 1);
+
+            overlapping = objList.some(object => {
+                const objects = document.getElementsByClassName(object);
+                for (let i = 0; i < objects.length; i++) {
+                    const boundingBox = objects[i].getBoundingClientRect();
+                    const horizontalOverlap = x + leftOffset >= boundingBox.left - 128 && x + leftOffset <= boundingBox.right;
+                    const verticalOverlap = y >= boundingBox.top - 256 && y <= boundingBox.bottom;
+                    if (horizontalOverlap && verticalOverlap) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        }
+
+        // Create tree element
+        const newTree = document.createElement("div");
+        newTree.classList.add("tree");
+        newTree.style.top = y + "px";
+        newTree.style.left = x + "px";
+        // Insert into DOM
+        leftSide.appendChild(newTree);
+
+    } else {
+        // Create tree on the right side
+
+        let overlapping = true;
+        while (overlapping) {
+            x = randomInt(xVar + 1);
+            y = randomInt(yVar + 1);
+
+            overlapping = objList.some(object => {
+                const objects = document.getElementsByClassName(object);
+                for (let i = 0; i < objects.length; i++) {
+                    const boundingBox = objects[i].getBoundingClientRect();
+                    const horizontalOverlap = x + rightOffset >= boundingBox.left - 128 && x + rightOffset <= boundingBox.right;
+                    const verticalOverlap = y >= boundingBox.top - 256 && y <= boundingBox.bottom;
+                    if (horizontalOverlap && verticalOverlap) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        }
+
+        // Create tree element
+        const newTree = document.createElement("div");
+        newTree.classList.add("tree");
+        newTree.style.top = y + "px";
+        newTree.style.left = x + "px";
+        // Insert into DOM
+        pathEdge = rightSide.querySelector("path-edge");
+        rightSide.insertBefore(newTree, pathEdge);
+    }
+}
+/* End random tree gen   */
+
+
+/* Handle textbox content changes */
+function changeText(text, townNum) {
+
+    document.getElementById("data" + townNum).innerText = text;
+}
+/* End textbox content changes */

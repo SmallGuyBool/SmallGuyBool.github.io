@@ -62,6 +62,13 @@ body {
     font-size: 100px;
 }
 
+#title-screen p {
+    position: absolute;
+    top: 50vh;
+    width: 800px;
+    left: calc(50% - 400px);
+}
+
 #start-button {
     width: 400px;
     height: 50px;
@@ -72,13 +79,14 @@ body {
     
     position: absolute;
 
-    top: 50vh;
+    top: 60vh;
     left: calc(50% - 200px);
 }
 
 #start-button:hover {
     cursor: pointer;
     background-color: black;
+    color: #ccc;
 }
 
 .sidebar {
@@ -166,6 +174,7 @@ body {
 
     margin-left: 384px;
     
+    
 
     z-index: 5;
 }
@@ -224,6 +233,7 @@ body {
     height: 384px;
     position: absolute;
     z-index: 3;
+
 }
 
 #text1 {
@@ -238,7 +248,7 @@ body {
     position: relative;
     margin-left: -512px;
     
-    z-index: 3;
+    z-index: 7;
 }
 
 .x-button {
@@ -252,12 +262,29 @@ body {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
+    font-family: 'pixel';
 }
 
 .x-button:hover {
     cursor: pointer;
     color: #ccc;
     
+}
+
+#arrow {
+    position: fixed;
+    z-index: 10;
+    
+    width: 128px;
+    height: 128px;
+
+    left: calc(50vw - 64px);
+    color: black;
+    text-align: center;
+    font-family: 'pixel';
+    font-size: 120px;
+
+    display: none;
 }
 
 .town-info {
@@ -271,6 +298,7 @@ body {
     opacity: 0;
     background-color: black;
     border: 4px solid white;
+    
 }
 
 #town1 {
@@ -288,7 +316,7 @@ body {
     
     /* Temp styles */
     background-image: url("./images/sprites/house1.png");
-    
+
 }
 
 .right {
@@ -312,15 +340,13 @@ body {
 
 .tree {
     position: absolute;
-    z-index: 4;
+    display: block;
+    z-index: 6;
     height: 256px;
     width: 128px;
     background-image: url('./images/sprites/spruce.png');
-}
 
-#test-tree {
-    margin-top: 128px;
-    margin-left: 128px;
+    
 }
 
 /* HIDE SCROLLBARS */

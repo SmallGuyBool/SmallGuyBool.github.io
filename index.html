@@ -12,12 +12,13 @@
     <body>
         <div id="title-screen">
             <h1 id="title">Distant Wind</h1>
+            <p>Turn your sound on for the best experience!</p>
             <button id="start-button">Begin</button>
         </div>
         <div id="main-content">
-            
+            <div id="arrow"></div>
 
-            <div id="cave">
+            <div class="cave" id="cave">
                 <!--<div id="cave-text">Scroll to begin your journey.</div>-->
             </div>
 
@@ -33,21 +34,19 @@
                 <div id="character"></div>
 
                 <div class="town" id="town1">
-                    <div class="info-container" id="data1">There you are. alone. yet surrounded by everything.
-                    </div>
+                    <div class="info-container" id="data1">There you are. alone. yet surrounded by everything.</div>
                     <div class="town-info" id="info1">
                         <button class="x-button" onclick="closeInfo('info1')">X</button>
                         <p></p>
                     </div>
-                    <div class="structure right interactable" id="building-1"></div>
-                    <div class="structure left" id=""></div>
+                    <div class="structure right interactable" id="building-1" onclick="changeText('There you are. alone. yet surrounded by everything.', 1)"></div>
+                    <div class="structure left interactable" id="building-1" onclick="changeText('This basdiufbasdiufsadiufsdaiu', 1)"></div>
                 </div>
 
 
             </div>
 
             <div class="sidebar content-column" id="right-bar">
-                <div class="tree" id="test-tree"></div>
                 <div class="env-text" id="text1"></div>
                 <div class="path-edge" id="right-path-edge"></div>
             </div>
