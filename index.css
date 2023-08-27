@@ -345,8 +345,33 @@ body {
     height: 256px;
     width: 128px;
     background-image: url('./images/sprites/spruce.png');
+}
 
-    
+.bush {
+    position: absolute;
+    display: block;
+    z-index: 5;
+    height: 128px;
+    width: 128px;
+    background-image: url('./images/sprites/bush.png');
+}
+
+.flowers {
+    position: absolute;
+    display: block;
+    z-index: 5;
+    height: 128px;
+    width: 128px;
+    background-image: url('./images/sprites/flowers.png');
+}
+
+.grass {
+    position: absolute;
+    display: block;
+    z-index: 5;
+    height: 128px;
+    width: 128px;
+    background-image: url('./images/sprites/long_grass.png');
 }
 
 /* HIDE SCROLLBARS */

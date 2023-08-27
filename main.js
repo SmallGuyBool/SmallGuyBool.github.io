@@ -23,8 +23,9 @@ startButton.addEventListener('click', async function() {
     // Play start audio
     var audio = new Audio("./audio/Opening_chord.mp3");
     audio.play();
-    await timer(8000);
+    await timer(5000);
     backgroundAudio.play();
+    backgroundAudio.loop = true;
 });
 
 titleScreen.addEventListener('animationend', () => {
@@ -156,27 +157,30 @@ document.addEventListener("scroll", (event) => {
 
 
 /* Random tree generator */
-
 function randomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-const numTrees = 200;
+const numTrees = 400;
 const leftSide = document.getElementById("left-bar");
 const rightSide = document.getElementById("right-bar");
 
 const leftOffset = leftSide.getBoundingClientRect().left;
 const rightOffset = rightSide.getBoundingClientRect().left;
-var side, x, y;
+var side, x, y, plant;
 const xVar = 384;
 const yVar = 8192 / 2;
 const objList = ["structure", "env-text", "cave"];
 
+const natureName = ['bush', 'flowers', 'tree', 'grass'];
+
 for (let j = 0; j < numTrees; j++) {
+    plant = natureName[randomInt(4)];
+
     side = randomInt(2);
     if (side == 0) {
         // Create tree on the left side
-
+        
         let overlapping = true;
         while (overlapping) {
             x = randomInt(xVar + 1);
@@ -198,9 +202,10 @@ for (let j = 0; j < numTrees; j++) {
 
         // Create tree element
         const newTree = document.createElement("div");
-        newTree.classList.add("tree");
+        newTree.classList.add(plant);
         newTree.style.top = y + "px";
         newTree.style.left = x + "px";
+        
         // Insert into DOM
         leftSide.appendChild(newTree);
 
@@ -228,15 +233,51 @@ for (let j = 0; j < numTrees; j++) {
 
         // Create tree element
         const newTree = document.createElement("div");
-        newTree.classList.add("tree");
+        newTree.classList.add(plant);
         newTree.style.top = y + "px";
         newTree.style.left = x + "px";
+        
         // Insert into DOM
         pathEdge = rightSide.querySelector("path-edge");
         rightSide.insertBefore(newTree, pathEdge);
     }
 }
+var body = document.body,
+    html = document.documentElement;
+
+var docHeight = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+layerZIndex(docHeight, 1000);
+
 /* End random tree gen   */
+
+/* Handle plant overlapping fix */
+function layerZIndex(pageSize, numIncrements) {
+
+    const natureName = ['tree'];
+    var zOffset = 5;
+    const incHeight = pageSize / numIncrements;
+    // Iterate through all increments in the page
+    for (let i = 0; i < pageSize; i += incHeight) {
+
+        // Iterate through all plant types
+        natureName.forEach(plantName => {
+            const plants = document.getElementsByClassName(plantName);
+            // Iterate through all plants of the given type
+            for(let j = 0; j < plants.length; j++) {
+
+                const plantOffset = plants[j].getBoundingClientRect().top;
+                if(i <= plantOffset && plantOffset <= i + incHeight) {
+                    plants[j].style.zIndex = zOffset;
+                }
+            }
+        });
+
+        zOffset++;
+    }
+    document.getElementById("title-screen").style.zIndex = zOffset + 1;
+}
+/* End overlapping handling */
 
 
 /* Handle textbox content changes */
