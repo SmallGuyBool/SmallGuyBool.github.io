@@ -315,8 +315,16 @@ body {
     position: relative;
     
     /* Temp styles */
-    background-image: url("./images/sprites/house1.png");
+   
 
+}
+
+#building-1-1 {
+    background-image: url("./images/sprites/ruin1.png");
+}
+
+#building-2-1 {
+    background-image: url("./images/sprites/ruin2.png");
 }
 
 @keyframes slideIn {
@@ -380,9 +388,19 @@ body {
     top: 0;
     right: 0;
 
+    color: white;
+    text-align: center;
+
+
     cursor: pointer;
     background-color: #292929;
 }
+
+.letter-close-btn p {
+    padding-top: 5px;
+    margin: 0 auto;
+}
+
 
 .letter-close-btn:hover{
     background-color: black;
@@ -391,6 +409,11 @@ body {
 #first-letter {
     top: 3200px;
     transform: rotate(45deg);
+}
+
+#letter-2 {
+    top: 3800px;
+    
 }
 
 .right {

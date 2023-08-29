@@ -307,6 +307,8 @@ for(let i = 0; i < numLetters; i++) {
         // Add X button to letter
         const xButton = document.createElement("div");
         xButton.classList.add("letter-close-btn");
+        xButton.innerHTML = "<p>x</p>";
+
         xButton.addEventListener('click', async function() {
             document.body.style.overflowY = 'scroll';
             openLetter.style.animationName = "slideOut";
