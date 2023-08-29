@@ -276,6 +276,7 @@ function layerZIndex(pageSize, numIncrements) {
         zOffset++;
     }
     document.getElementById("title-screen").style.zIndex = zOffset + 1;
+    document.getElementById("letter-content").style.zIndex = zOffset + 1;
 }
 /* End overlapping handling */
 
@@ -286,3 +287,38 @@ function changeText(text, townNum) {
     document.getElementById("data" + townNum).innerText = text;
 }
 /* End textbox content changes */
+
+
+/* Handle interaction with letters */
+const letters = document.getElementsByClassName("letter");
+const openLetter = document.getElementById("letter-content");
+const numLetters = letters.length;
+// Iterate through all letters
+for(let i = 0; i < numLetters; i++) {
+    // Add onclick event to every letter on the ground
+    letters[i].addEventListener('click', function() {
+        document.body.style.overflowY = 'hidden';
+
+        // Add X button to letter
+        const xButton = document.createElement("div");
+        xButton.classList.add("letter-close-btn");
+        xButton.addEventListener('click', async function() {
+            document.body.style.overflowY = 'scroll';
+            openLetter.style.animationName = "slideOut";
+            await timer(500);
+            openLetter.style.display = "none";
+        });
+        openLetter.appendChild(xButton);
+
+        // Animate letter opening
+        openLetter.style.display = "block";
+        openLetter.style.animationName = "slideIn";
+        openLetter.style.animationDuration = "0.5s";
+        openLetter.style.animationFillMode = "forwards";
+    });
+}
+
+function setLetterContent(content) {
+    openLetter.innerHTML = content;
+}
+/* End letter interacting handling */

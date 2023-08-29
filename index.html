@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+
+<!--
+
+Written By Julian Lewis for CCDP10003 at the University of Melbourne
+Submitted 04/09/2023 with group members Joshua Tait, and Chiyo Lestrange (Phan)
+-->
+
 <html>
 
     <head>
@@ -15,6 +22,9 @@
             <p>Turn your sound on for the best experience!</p>
             <button id="start-button">Begin</button>
         </div>
+
+        <div id="letter-content"></div>
+
         <div id="main-content">
             <div id="arrow"></div>
 
@@ -39,10 +49,12 @@
                         <button class="x-button" onclick="closeInfo('info1')">X</button>
                         <p></p>
                     </div>
-                    <div class="structure right interactable" id="building-1" onclick="changeText('There you are. alone. yet surrounded by everything.', 1)"></div>
-                    <div class="structure left interactable" id="building-1" onclick="changeText('This basdiufbasdiufsadiufsdaiu', 1)"></div>
+                    <div class="structure right interactable" id="building-1" onclick="changeText('There you are. Alone. The serene wilderness stretches beyond the horizon.', 1)"></div>
+                    <div class="structure left interactable" id="building-1" onclick="changeText('Welcome to the world of Distant Wind', 1)"></div>
                 </div>
-
+                <div class="letter" id="first-letter" onclick="setLetterContent('No tutorial lies before you, you don\'t need to be told how to explore, or how to think.<br><br>This'
+                 + ' pure sense of exploration, wonder, and scale is the very foundation of Distant Wind.<br><br>The player is greeted with nothing but a beautiful expansive landscape, '
+                 + 'a simple yet elegant instrumental soundtrack, and a mysterious but inviting glow in the sky beyond the horizon.')"></div>
 
             </div>
 
