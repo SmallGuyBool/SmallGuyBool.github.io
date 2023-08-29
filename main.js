@@ -276,7 +276,12 @@ function layerZIndex(pageSize, numIncrements) {
         zOffset++;
     }
     document.getElementById("title-screen").style.zIndex = zOffset + 1;
-    document.getElementById("letter-content").style.zIndex = zOffset + 1;
+    document.getElementById("letter-content").style.zIndex = zOffset + 5;
+    const dataBoxes = document.getElementsByClassName("town");
+    const numDataBoxes = dataBoxes.length;
+    for(let i = 0; i < numDataBoxes; i++) {
+        dataBoxes[i].style.zIndex = zOffset + 1;
+    }
 }
 /* End overlapping handling */
 
