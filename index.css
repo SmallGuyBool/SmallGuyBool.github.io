@@ -413,7 +413,13 @@ body {
 
 #letter-2 {
     top: 3800px;
-    
+    left: calc(3 * 128px - 80px);
+    transform: rotate(15deg);
+}
+
+#letter-3 {
+    top: 4000px;
+    transform: rotate(-23deg);
 }
 
 .right {
