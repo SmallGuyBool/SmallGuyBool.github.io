@@ -422,7 +422,7 @@ body {
 .letter:hover {
     cursor: pointer;
     
-    width: 84px;
+    width: 86px;
     height: 60px;
     
     box-shadow: 4px 2px 4px 2px rgba(0, 0, 0, 0.39)
@@ -478,7 +478,7 @@ body {
     top: 4850px;
     
     width: 400px;
-    height: 300px;
+    height: 340px;
 }
 
 #text4 {

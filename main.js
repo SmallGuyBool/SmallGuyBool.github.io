@@ -87,7 +87,18 @@ combinedElements.forEach(building => {
         // Get info box corresponding to the town clicked on
         const townNum = event.target.id[event.target.id.length - 1];
         
+        let isPerson = event.target.id.includes("person");
+
         const infoBox = document.getElementById("info" + townNum);
+        if(isPerson) {
+            // Calculate offset to make it next to the person
+            const townHeight = document.getElementById("town" + townNum).getBoundingClientRect().top;
+            const personHeight = building.getBoundingClientRect().top;
+            infoBox.style.top = (personHeight - townHeight) + "px";
+        } else {
+            infoBox.style.top = "0px";
+        }
+
         const info = document.getElementById("data" + townNum).innerText;
     
         // Check box isn't already open
@@ -144,7 +155,7 @@ combinedElements.forEach(building => {
                     break;
                 }
                 
-                await timer(70);
+                await timer(50);
 
                 
                 letter = info[i];
@@ -166,14 +177,31 @@ combinedElements.forEach(building => {
 /* End building interaction */
 
 /* Character animator */
-var lastPos, currPos = 0;
+var lastPos = 0, currPos = 0;
 var scrollIncrements = 4;
 var scrollCount = 0;
 var imgOffset = 0;
+var scrollDir;
 document.addEventListener("scroll", (event) => {
     // Check current scroll position
     currPos = window.scrollY;
 
+    // Get scroll position
+    scrollDir = (currPos - lastPos)/Math.abs(currPos - lastPos);
+
+
+    // Pick spritesheet based on direction
+    const player = document.getElementById("character");
+    if(scrollDir >= 0) {
+        // Going down
+        player.style.backgroundImage = "url('./images/sprites/cat_sprite_sheet.png')";
+    } else {
+        // Going up
+        player.style.backgroundImage = "url('./images/sprites/cat_sprite_sheet_reverse.png')";
+
+    }
+
+    lastPos = currPos;
     // Offset spritesheet position
     if (scrollCount >= scrollIncrements)
     {
@@ -183,7 +211,7 @@ document.addEventListener("scroll", (event) => {
         scrollCount++;
     }
     if(imgOffset == 128 * 4) {imgOffset = 0;}
-    const player = document.getElementById("character");
+    
     player.style.backgroundPositionX = imgOffset + "px";
 });
 /* End Character animator */
