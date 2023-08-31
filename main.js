@@ -1,10 +1,18 @@
 
 var backgroundAudio = new Audio("./audio/forest.mp3");
 
+document.onreadystatechange = function () {
+    if(document.readyState == "complete") {
+        document.getElementById("loading").style.display = "none";
+    }
+};
 
 /* Handle document loading events */
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
+    titleScreen.style.display = "block";
+    titleScreen.style.animationPlayState = "paused"; 
+    document.getElementById("loading").style.display = "block";  
 }
 /*End document loading event handling */
 
@@ -16,6 +24,7 @@ const titleScreen = document.getElementById('title-screen');
 
 startButton.addEventListener('click', async function() {
     document.body.style.overflowY = 'scroll';
+    titleScreen.style.animationPlayState = "running";
     titleScreen.style.animationName = 'fade-out';
     titleScreen.style.animationDuration = '1s';
     titleScreen.style.animationFillMode = 'forwards';
@@ -161,7 +170,7 @@ function randomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-const numTrees = 400;
+const numTrees = 700;
 const leftSide = document.getElementById("left-bar");
 const rightSide = document.getElementById("right-bar");
 
@@ -169,7 +178,7 @@ const leftOffset = leftSide.getBoundingClientRect().left;
 const rightOffset = rightSide.getBoundingClientRect().left;
 var side, x, y, plant;
 const xVar = 384;
-const yVar = 8192 / 2;
+const yVar = 8192;
 const objList = ["structure", "env-text", "cave"];
 
 const natureName = ['bush', 'flowers', 'tree', 'grass'];
@@ -307,7 +316,7 @@ for(let i = 0; i < numLetters; i++) {
         // Add X button to letter
         const xButton = document.createElement("div");
         xButton.classList.add("letter-close-btn");
-        xButton.innerHTML = "<p>x</p>";
+        xButton.innerHTML = "<h1>x</h1>";
 
         xButton.addEventListener('click', async function() {
             document.body.style.overflowY = 'scroll';
@@ -316,6 +325,28 @@ for(let i = 0; i < numLetters; i++) {
             openLetter.style.display = "none";
         });
         openLetter.appendChild(xButton);
+
+        openLetter.style.backgroundImage = "url('./images/sprites/initial_open_letter.png')";
+        openLetter.style.backgroundPositionX = "0px";
+        // Add 'open' event listener
+        openLetter.addEventListener('click', async function() {
+            var bgOffset = 0;
+            openLetter.style.backgroundImage = "url('./images/sprites/letter_open.png')";
+            
+            
+
+            // Play all frames of the opening animation
+            for(let j = 0; j < 7; j++) {
+
+                await timer(50);
+                bgOffset -= 700;
+                openLetter.style.backgroundPositionX = bgOffset + "px";
+                
+            }
+            // Now we can display the text
+            xButton.style.display = "block";
+            openLetter.querySelector("p").style.display = "block";
+        }, {once : true});
 
         // Animate letter opening
         openLetter.style.display = "block";
