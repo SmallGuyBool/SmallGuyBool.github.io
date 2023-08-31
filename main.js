@@ -5,6 +5,9 @@ document.onreadystatechange = async function () {
     if(document.readyState == "complete") {
         document.getElementById("loading").style.display = "none";
 
+        // Preload both character spritesheets to improve performance
+        document.getElementById("character").style.backgroundImage = "url('./images/sprites/cat_sprite_sheet_reverse.png')";
+        document.getElementById("character").style.backgroundImage = "url('./images/sprites/cat_sprite_sheet.png')";
         await animatePeople();
         
     }
@@ -95,8 +98,19 @@ combinedElements.forEach(building => {
             const townHeight = document.getElementById("town" + townNum).getBoundingClientRect().top;
             const personHeight = building.getBoundingClientRect().top;
             infoBox.style.top = (personHeight - townHeight) + "px";
+
+            // Now customise it to look like a speech bubble
+            infoBox.style.color = "black";
+            infoBox.style.backgroundColor = "white";
+            infoBox.style.borderRadius = "20px";
+            
         } else {
+            // Reset to standard building style
             infoBox.style.top = "0px";
+            infoBox.style.color = "white";
+            infoBox.style.backgroundColor = "black";
+            infoBox.style.borderRadius = "0px";
+            
         }
 
         const info = document.getElementById("data" + townNum).innerText;
@@ -233,10 +247,10 @@ const xVar = 384;
 const yVar = 8192;
 const objList = ["structure", "env-text", "cave", "person"];
 
-const natureName = ['bush', 'flowers', 'tree', 'grass'];
+const natureName = ['bush', 'flowers', 'tree', 'grass', 'pine'];
 
 for (let j = 0; j < numTrees; j++) {
-    plant = natureName[randomInt(4)];
+    plant = natureName[randomInt(natureName.length)];
 
     side = randomInt(2);
     if (side == 0) {
@@ -315,7 +329,7 @@ layerZIndex(docHeight, 1000);
 /* Handle plant overlapping fix */
 function layerZIndex(pageSize, numIncrements) {
 
-    const natureName = ['tree'];
+    const natureName = ['tree', 'pine'];
     var zOffset = 5;
     const incHeight = pageSize / numIncrements;
     // Iterate through all increments in the page
@@ -385,8 +399,8 @@ for(let i = 0; i < numLetters; i++) {
         openLetter.addEventListener('click', async function() {
             var bgOffset = 0;
             openLetter.style.backgroundImage = "url('./images/sprites/letter_open.png')";
-            
-            
+            const paperSound = new Audio("./audio/paper.mp3");
+            paperSound.play();
 
             // Play all frames of the opening animation
             for(let j = 0; j < 7; j++) {

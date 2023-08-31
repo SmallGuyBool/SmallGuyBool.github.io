@@ -271,7 +271,7 @@ body {
     width: 40px;
     height: 40px;
     border: 0px;
-    color: white;
+    color: red;
     transform: translateX(calc(256px - 20px));
     background-color: transparent;
     font-size: 20px;
@@ -286,7 +286,7 @@ body {
 
 .x-button:hover {
     cursor: pointer;
-    color: #ccc;
+    color: rgb(160, 0, 0);
     
 }
 
@@ -358,8 +358,10 @@ body {
     background-image: url("./images/sprites/wiz_tower.png");
 }
 
-#building-2-2 {
-    background-image: url("./images/sprites/house1.png");
+#person-2-2 {
+    background-image: url("./images/sprites/grandma.png");
+    transform: scaleX(-1);
+    left: 300px;
 }
 
 #person-1-2 {
@@ -478,7 +480,7 @@ body {
     top: 4850px;
     
     width: 400px;
-    height: 340px;
+    height: 410px;
 }
 
 #text4 {
@@ -522,6 +524,15 @@ body {
     height: 256px;
     width: 128px;
     background-image: url('./images/sprites/spruce.png');
+}
+
+.pine {
+    position: absolute;
+    display: block;
+    z-index: 6;
+    height: 256px;
+    width: 128px;
+    background-image: url('./images/sprites/pine.png');
 }
 
 .bush {
