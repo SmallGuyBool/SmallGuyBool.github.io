@@ -1,11 +1,33 @@
 
 var backgroundAudio = new Audio("./audio/forest.mp3");
 
-document.onreadystatechange = function () {
+document.onreadystatechange = async function () {
     if(document.readyState == "complete") {
         document.getElementById("loading").style.display = "none";
+
+        await animatePeople();
+        
     }
 };
+
+/* Start Person animator */
+async function animatePeople() {
+    /* Animate all people on screen (yes i know this is INSANELY inefficient but i 
+    don't really care at this point lmao) */
+
+    const people = document.getElementsByClassName("person");
+    const numPeople = people.length;
+    const animFrames = 4;
+    while(true) {
+        for(let currFrame = 0; currFrame <= animFrames; currFrame++) {
+            for(let personIdx = 0; personIdx < numPeople; personIdx++) {
+                people[personIdx].style.backgroundPositionX  = (currFrame * 128) + "px";
+            }
+            await timer(100);
+        }
+    }
+}
+/* End Person animator*/
 
 /* Handle document loading events */
 window.onbeforeunload = function () {
@@ -55,8 +77,10 @@ function closeInfo(name) {
 
 /* Add onclick handling to interactable buildings */
 const interactableBuildings = Array.from(document.getElementsByClassName("interactable"));
+const interactablePeople = Array.from(document.getElementsByClassName("interactable-person"));
 
-interactableBuildings.forEach(building => {
+const combinedElements = [...interactableBuildings, ...interactablePeople];
+combinedElements.forEach(building => {
     building.addEventListener("click", async function(event) {
         // Function to handle building information
         
@@ -179,7 +203,7 @@ const rightOffset = rightSide.getBoundingClientRect().left;
 var side, x, y, plant;
 const xVar = 384;
 const yVar = 8192;
-const objList = ["structure", "env-text", "cave"];
+const objList = ["structure", "env-text", "cave", "person"];
 
 const natureName = ['bush', 'flowers', 'tree', 'grass'];
 
@@ -307,6 +331,7 @@ function changeText(text, townNum) {
 const letters = document.getElementsByClassName("letter");
 const openLetter = document.getElementById("letter-content");
 const numLetters = letters.length;
+
 // Iterate through all letters
 for(let i = 0; i < numLetters; i++) {
     // Add onclick event to every letter on the ground

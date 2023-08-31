@@ -324,6 +324,10 @@ body {
     top: 2048px;
 }
 
+#town2 {
+    top: 6048px;
+}
+
 .info-container {
     display: none;
 }
@@ -334,8 +338,12 @@ body {
     position: relative;
     
     /* Temp styles */
-   
+}
 
+.person {
+    width: 128px;
+    height: 256px;
+    position: relative;
 }
 
 #building-1-1 {
@@ -344,6 +352,18 @@ body {
 
 #building-2-1 {
     background-image: url("./images/sprites/ruin2.png");
+}
+
+#building-1-2 {
+    background-image: url("./images/sprites/wiz_tower.png");
+}
+
+#building-2-2 {
+    background-image: url("./images/sprites/house1.png");
+}
+
+#person-1-2 {
+    background-image: url("./images/sprites/wizard.png");
 }
 
 @keyframes slideIn {
@@ -451,7 +471,7 @@ body {
     top: 4300px;
     
     width: 400px;
-    height: 450px;
+    height: 470px;
 }
 
 #text3 {
@@ -486,6 +506,9 @@ body {
     cursor: pointer;
 }
 
+.interactable-person:hover {
+    cursor: pointer;
+}
 
 .plant {
     position: absolute;
