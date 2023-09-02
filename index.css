@@ -1,5 +1,5 @@
 html {
-    height: 2000vh;
+    height: calc(2 * 8192px + 256px);
 }
 
 @font-face {
@@ -368,6 +368,10 @@ body {
     background-image: url("./images/sprites/wizard.png");
 }
 
+#building-2-2 {
+    background-image: url('./images/sprites/house1.png');
+}
+
 @keyframes slideIn {
     from {
         top: calc(100vh);
@@ -488,6 +492,13 @@ body {
     
     width: 400px;
     height: 300px;
+}
+
+#text5 {
+    left: 64px;
+    top: 1200px;
+    height: 100px;
+    text-align: center;
 }
 
 #letter-3 {
