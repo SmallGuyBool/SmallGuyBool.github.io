@@ -37,7 +37,8 @@ window.onbeforeunload = function () {
     window.scrollTo(0, 0);
     titleScreen.style.display = "block";
     titleScreen.style.animationPlayState = "paused"; 
-    document.getElementById("loading").style.display = "block";  
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("letter-content").style.display = "none";
 }
 /*End document loading event handling */
 

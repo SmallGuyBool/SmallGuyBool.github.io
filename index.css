@@ -1,5 +1,5 @@
 html {
-    height: calc(2 * 8192px + 256px);
+    height: calc(2 * 8192px + 256px + 100vh);
 }
 
 @font-face {
@@ -32,10 +32,32 @@ body {
 
 #main-content {
     display: flex;
-    height: inherit;
+    height: calc(2 * 8192px + 256px);
     width: 1408px;
     
     margin: 0 auto;
+}
+
+#credits {
+    width: 100vw;
+    height: 100vh;
+
+
+    padding-top: 30px;
+    background-color: white;
+    text-align: center;
+}
+
+#credit-content {
+    width: 1408px;
+    height: 100vh;
+
+    margin: 0 auto;
+    text-align: center;
+}
+
+#credits h1, h2 {
+    margin-top: 0px;
 }
 
 @keyframes fade-out {
@@ -504,6 +526,17 @@ body {
 #letter-3 {
     top: 5500px;
     transform: rotate(-23deg);
+}
+
+#letter-4 {
+    left: 512px;
+    top: 1280px;
+    transform: rotate(-79deg);
+}
+
+#letter-5 {
+    left: calc(512px + 384px);
+    top: 1500px;
 }
 
 .right {
