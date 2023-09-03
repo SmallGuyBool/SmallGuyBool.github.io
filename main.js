@@ -237,7 +237,7 @@ function randomInt(max) {
     return Math.floor(Math.random() * max);
 }
 
-const numTrees = 1400;
+const numTrees = 900;
 const leftSide = document.getElementById("left-bar");
 const rightSide = document.getElementById("right-bar");
 
@@ -245,7 +245,7 @@ const leftOffset = leftSide.getBoundingClientRect().left;
 const rightOffset = rightSide.getBoundingClientRect().left;
 var side, x, y, plant;
 const xVar = 384;
-const yVar = 8192 * 2;
+const yVar = 10000;
 const objList = ["structure", "env-text", "cave", "person"];
 
 const natureName = ['bush', 'flowers', 'tree', 'grass', 'pine'];
