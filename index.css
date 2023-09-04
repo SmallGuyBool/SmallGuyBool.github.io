@@ -38,11 +38,27 @@ body {
     margin: 0 auto;
 }
 
+#black-screen {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+
+    background-color: white;
+    opacity: 0;
+
+    transition: opacity 0.5s; 
+    
+    
+}
+
 #water-level {
     height: 5000px;
     width: 1408px;
     margin: 0 auto;
     background-image: url('./images/tiles/water.png');
+
+    text-align: left;
 }
 
 #credits {
@@ -252,6 +268,22 @@ body {
     top: 128px;
 }
 
+#raft {
+    position: fixed;
+    display: none;
+
+    z-index: 100;
+
+    width: 128px;
+    height: 256px;
+
+    margin: 0 auto;
+    margin-left: 128px;
+    top: 80px;
+
+    background-image: url('./images/sprites/raft.png');
+}
+
 @keyframes glow {
     from {box-shadow: 2px 2px 2px 2px rgba(255, 255, 255, 0);}
     to {box-shadow: 0px 0px 5px 5px white;}
@@ -278,6 +310,22 @@ body {
 
     left: calc(50% - 200px);
     line-height: 1.5;
+
+    z-index: 2000;
+}
+
+.water-text {
+    width: 384px;
+    height: 384px;
+    position: absolute;
+    z-index: 3;
+    font-family: 'pixel';
+    color: white;
+    font-size: large;
+
+    line-height: 1.5;
+
+    z-index: 2000;
 }
 
 #text1 {
@@ -454,6 +502,8 @@ body {
     top: 100px;
     left: calc(50vw - 350px);
     display: none;
+
+    z-index: 2001;
 }
 
 #letter-content p {
@@ -469,7 +519,7 @@ body {
     width: 80px;
     height: 56px;
     position: absolute;
-    z-index: 4;
+    z-index: 2000;
 
     background-image: url('./images/sprites/letter.png');
     background-size: cover;
@@ -552,8 +602,14 @@ body {
 }
 
 #text6 {
-    left: 64px;
-    top: 9000px;
+    left: 128px;
+    top: 12300px;
+    height: 500px;
+}
+
+#text7 {
+    right: 128px;
+    top: 12600px;
     height: 500px;
 }
 

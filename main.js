@@ -1,5 +1,8 @@
 
 var backgroundAudio = new Audio("./audio/forest.mp3");
+var waterMusic = new Audio("./audio/water_waltz.mp3");
+waterMusic.loop = true;
+waterMusic.volume = 0;
 
 document.onreadystatechange = async function () {
     if(document.readyState == "complete") {
@@ -201,6 +204,12 @@ document.addEventListener("scroll", (event) => {
     // Check current scroll position
     currPos = window.scrollY;
 
+    // Define area boundaries in pixels
+    // endFirstArea is the bottom of Felix's bounding box
+    const endFirstArea = 8500;
+    const transitionArea = 2500;
+    const startWater = endFirstArea + transitionArea;
+
     // Get scroll position
     scrollDir = (currPos - lastPos)/Math.abs(currPos - lastPos);
 
@@ -219,17 +228,32 @@ document.addEventListener("scroll", (event) => {
     }
 
     lastPos = currPos;
-    // Offset spritesheet position
-    if (scrollCount >= scrollIncrements)
-    {
-        imgOffset += 128;
-        scrollCount = 0;
+    // Offset spritesheet position if not on raft
+    if(currPos < 11300 || currPos >= 15256 - 64 - 190) {
+        
+        if (scrollCount >= scrollIncrements)
+        {
+            imgOffset += 128;
+            scrollCount = 0;
+        } else {
+            scrollCount++;
+        }
+        if(imgOffset == 128 * 4) {imgOffset = 0;}
+
+        player.style.backgroundPositionX = imgOffset + "px";
     } else {
-        scrollCount++;
+        player.style.backgroundPositionX = 0 + "px";
     }
-    if(imgOffset == 128 * 4) {imgOffset = 0;}
-    
-    player.style.backgroundPositionX = imgOffset + "px";
+
+    // Pause raft when credits are reached
+    const raft = document.getElementById("raft");
+    if (currPos >= 15256 - 64 - 190) {
+        raft.style.position = "absolute";
+        raft.style.top = 15256 - 64 - 128 + "px";
+    } else {
+        raft.style.position = "fixed";
+        raft.style.removeProperty("top");
+    }
 });
 /* End Character animator */
 
@@ -353,13 +377,18 @@ function layerZIndex(pageSize, numIncrements) {
 
         zOffset++;
     }
-    document.getElementById("title-screen").style.zIndex = zOffset + 1;
-    document.getElementById("letter-content").style.zIndex = zOffset + 5;
+    document.getElementById("title-screen").style.zIndex = zOffset + 4;
+   
+    document.getElementById("black-screen").style.zIndex = zOffset + 1;
+    document.getElementById("character").style.zIndex = zOffset + 2;
+    document.getElementById("cave").style.zIndex = zOffset + 3;
+
     const dataBoxes = document.getElementsByClassName("town");
     const numDataBoxes = dataBoxes.length;
     for(let i = 0; i < numDataBoxes; i++) {
-        dataBoxes[i].style.zIndex = zOffset + 1;
+        dataBoxes[i].style.zIndex = zOffset + 3;
     }
+    
 }
 /* End overlapping handling */
 
@@ -433,20 +462,58 @@ function setLetterContent(content) {
 
 
 /* Handle fade to black when transitioning to water are */
-function handleFade(scrollPosition, scrollDirection) {
+async function handleFade(scrollPosition, scrollDirection) {
 
     // Define area boundaries in pixels
     // endFirstArea is the bottom of Felix's bounding box
-    const endFirstArea = 9000;
-    const transitionArea = 1000;
+    const endFirstArea = 8500;
+    const transitionArea = 2800;
     const startWater = endFirstArea + transitionArea;
 
-    var fadePosition;
-    // Current scroll position is within the fade area
-    if (scrollPosition >= endFirstArea && scrollPosition <= startWater) {
-        fadePosition = (scrollPosition - endFirstArea) / (transitionArea);
+    const midPoint = startWater / 2;
 
-        console.log(fadePosition);
+    var relativePosition;
+
+    // Define involved elements
+    const blackScreen = document.getElementById('black-screen');
+
+    // If transition area is reached and user is scrolling down
+    if(scrollPosition >= endFirstArea && scrollPosition <= startWater) {
+
+        relativePosition = Math.abs((scrollPosition - (endFirstArea + transitionArea / 2))/transitionArea * 2);
+        
+        blackScreen.style.opacity = 1;
+        
+        // Change music audio based on transition position
+        backgroundAudio.volume = relativePosition;
+        waterMusic.volume = relativePosition;
+
+        // Detect which side of the transition you are on to switch music
+        if((scrollPosition - endFirstArea) - transitionArea/2 >= (startWater - scrollPosition)) {
+            // Closer to the water side
+            backgroundAudio.volume = 0;
+            waterMusic.volume = relativePosition;
+            backgroundAudio.pause();
+            waterMusic.play();
+        } else {
+            // Closer to the land side
+            backgroundAudio.volume = relativePosition;
+            waterMusic.volume = 0;
+            waterMusic.pause();
+            backgroundAudio.play();
+        }
+    } else {
+
+        blackScreen.style.opacity = 0;
+        
+    }
+
+    // Display raft
+    const raft =  document.getElementById("raft")
+    if(scrollPosition >= endFirstArea + 1500) {
+        raft.style.display = "block";
+    } else {
+        raft.style.display = "none";
     }
 }
 /* End fade handling */
