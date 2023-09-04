@@ -204,6 +204,8 @@ document.addEventListener("scroll", (event) => {
     // Get scroll position
     scrollDir = (currPos - lastPos)/Math.abs(currPos - lastPos);
 
+    // Call area fade handler
+    handleFade(currPos, scrollDir);
 
     // Pick spritesheet based on direction
     const player = document.getElementById("character");
@@ -428,3 +430,23 @@ function setLetterContent(content) {
     openLetter.innerHTML = content;
 }
 /* End letter interacting handling */
+
+
+/* Handle fade to black when transitioning to water are */
+function handleFade(scrollPosition, scrollDirection) {
+
+    // Define area boundaries in pixels
+    // endFirstArea is the bottom of Felix's bounding box
+    const endFirstArea = 9000;
+    const transitionArea = 1000;
+    const startWater = endFirstArea + transitionArea;
+
+    var fadePosition;
+    // Current scroll position is within the fade area
+    if (scrollPosition >= endFirstArea && scrollPosition <= startWater) {
+        fadePosition = (scrollPosition - endFirstArea) / (transitionArea);
+
+        console.log(fadePosition);
+    }
+}
+/* End fade handling */

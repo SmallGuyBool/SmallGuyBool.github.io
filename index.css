@@ -1,5 +1,5 @@
 html {
-    height: calc(10000px + 256px + 100vh);
+    height: calc(10000px + 256px + 100vh + 5000px);
 }
 
 @font-face {
@@ -36,6 +36,13 @@ body {
     width: 1408px;
     
     margin: 0 auto;
+}
+
+#water-level {
+    height: 5000px;
+    width: 1408px;
+    margin: 0 auto;
+    background-image: url('./images/tiles/water.png');
 }
 
 #credits {
@@ -390,8 +397,29 @@ body {
     background-image: url("./images/sprites/wizard.png");
 }
 
+#person-3-2 {
+    /* Jumino */
+
+    background-image: url("./images/sprites/jumino.png");
+    height: 128px;
+    top: 128px;
+    left: -90px;
+}
+
+#person-4-2 {
+    /* Felix */
+
+    background-image: url('./images/sprites/felix.png');
+    top: 128px;
+}
+
 #building-2-2 {
     background-image: url('./images/sprites/house1.png');
+}
+
+#building-3-2 {
+    background-image: url('./images/sprites/house2.png');
+    top: 128px;
 }
 
 @keyframes slideIn {
