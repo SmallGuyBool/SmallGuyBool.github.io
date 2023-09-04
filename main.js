@@ -6,7 +6,11 @@ waterMusic.volume = 0;
 
 document.onreadystatechange = async function () {
     if(document.readyState == "complete") {
+        // Reformat title screen when the webpage has been fully loaded
         document.getElementById("loading").style.display = "none";
+        document.getElementById("title").style.display = "block";
+        document.getElementById("start-button").style.display = "block";
+
 
         // Preload both character spritesheets to improve performance
         document.getElementById("character").style.backgroundImage = "url('./images/sprites/cat_sprite_sheet_reverse.png')";
@@ -38,6 +42,9 @@ async function animatePeople() {
 /* Handle document loading events */
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
+    document.getElementById("title").style.display = "none";
+    document.getElementById("start-button").style.display = "none";
+
     titleScreen.style.display = "block";
     titleScreen.style.animationPlayState = "paused"; 
     document.getElementById("loading").style.display = "block";
@@ -377,8 +384,7 @@ function layerZIndex(pageSize, numIncrements) {
 
         zOffset++;
     }
-    document.getElementById("title-screen").style.zIndex = zOffset + 4;
-   
+    
     document.getElementById("black-screen").style.zIndex = zOffset + 1;
     document.getElementById("character").style.zIndex = zOffset + 2;
     document.getElementById("cave").style.zIndex = zOffset + 3;

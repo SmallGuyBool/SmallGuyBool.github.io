@@ -48,8 +48,14 @@ body {
     opacity: 0;
 
     transition: opacity 0.5s; 
-    
-    
+
+}
+
+#black-screen h1 {
+    text-align: center;
+    font-size: 100px;
+    font-family: 'pixel';
+    margin-top: calc(50vh - 50px);
 }
 
 #water-level {
@@ -94,7 +100,7 @@ body {
     height: 100%;
     background-color: white;
     font-family: 'pixel';
-    z-index: 10;
+    z-index: 3000;
     
 }
 
@@ -105,6 +111,13 @@ body {
 
     left: calc(50% - 400px);
     font-size: 100px;
+
+    display: none;
+}
+
+#title-screen p, 
+#title-screen button {
+    display: none;
 }
 
 #loading {
@@ -112,7 +125,7 @@ body {
     text-align: center;
     width: 800px;
 
-    top: calc(70%);
+    top: calc(35vh);
 
     left: calc(50vw - 400px);
     font-size: 100px;
@@ -432,7 +445,7 @@ body {
 }
 
 #building-1-2 {
-    background-image: url("./images/sprites/wiz_tower.png");
+    background-image: url("./images/sprites/rocks.png");
 }
 
 #person-2-2 {
@@ -468,6 +481,18 @@ body {
 #building-3-2 {
     background-image: url('./images/sprites/house2.png');
     top: 128px;
+}
+
+#water-ruins-1 {
+    background-image: url('./images/sprites/water_ruin.png');
+    top: 1800px;
+    left: calc(384px + 512px + 128px);
+}
+
+#water-ruins-2 {
+    background-image: url('./images/sprites/wiz_tower.png');
+    top: 2300px;
+    left: 128px;
 }
 
 @keyframes slideIn {
@@ -602,14 +627,14 @@ body {
 }
 
 #text6 {
-    left: 128px;
+    margin-left: 128px;
     top: 12300px;
     height: 500px;
 }
 
 #text7 {
-    right: 128px;
-    top: 12600px;
+    margin-left: calc(512px + 384px);
+    top: 13600px;
     height: 500px;
 }
 
